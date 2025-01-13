@@ -15,7 +15,10 @@ interface CartProps {
 const Cart = ({ items, onUpdateQuantity, onRemoveItem }: CartProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const totalAmount = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const totalAmount = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
@@ -38,13 +41,25 @@ const Cart = ({ items, onUpdateQuantity, onRemoveItem }: CartProps) => {
                 <CartItemCard key={item.id}>
                   <ItemInfo>
                     <ItemName>{item.name}</ItemName>
-                    <ItemPrice>{(item.price * item.quantity).toLocaleString()}원</ItemPrice>
+                    <ItemPrice>
+                      {(item.price * item.quantity).toLocaleString()}원
+                    </ItemPrice>
                   </ItemInfo>
                   <ItemControls>
-                    <QuantityButton onClick={() => onUpdateQuantity(item.id, -1)}>-</QuantityButton>
+                    <QuantityButton
+                      onClick={() => onUpdateQuantity(item.id, -1)}
+                    >
+                      -
+                    </QuantityButton>
                     <QuantityDisplay>{item.quantity}</QuantityDisplay>
-                    <QuantityButton onClick={() => onUpdateQuantity(item.id, 1)}>+</QuantityButton>
-                    <RemoveButton onClick={() => onRemoveItem(item.id)}>삭제</RemoveButton>
+                    <QuantityButton
+                      onClick={() => onUpdateQuantity(item.id, 1)}
+                    >
+                      +
+                    </QuantityButton>
+                    <RemoveButton onClick={() => onRemoveItem(item.id)}>
+                      삭제
+                    </RemoveButton>
                   </ItemControls>
                 </CartItemCard>
               ))
@@ -70,17 +85,17 @@ const CartButton = styled.button`
   bottom: 20px;
   right: 20px;
   padding: 12px 24px;
-  background-color: #2196f3;
-  color: white;
+  background-color: #424242;
+  color: #e0e0e0;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   font-size: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #1976d2;
+    background-color: #4a4a4a;
     transform: translateY(-2px);
   }
 `;
@@ -91,16 +106,16 @@ const CartContainer = styled.div`
   right: 20px;
   width: 350px;
   height: 500px;
-  background: white;
+  background: #2d2d2d;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
 `;
 
 const CartHeader = styled.div`
   padding: 16px;
-  background: #2196f3;
+  background: #1e88e5;
   color: white;
   border-radius: 12px 12px 0 0;
 
@@ -121,13 +136,13 @@ const ItemsContainer = styled.div`
 
 const EmptyCart = styled.div`
   text-align: center;
-  color: #666;
+  color: #b0b0b0;
   padding: 20px;
 `;
 
 const CartItemCard = styled.div`
   padding: 12px;
-  background: #f5f5f5;
+  background: #3d3d3d;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -142,10 +157,11 @@ const ItemInfo = styled.div`
 
 const ItemName = styled.span`
   font-weight: 500;
+  color: white;
 `;
 
 const ItemPrice = styled.span`
-  color: #2196f3;
+  color: #1e88e5;
   font-weight: 600;
 `;
 
@@ -160,16 +176,17 @@ const QuantityButton = styled.button`
   height: 28px;
   border: none;
   border-radius: 4px;
-  background: #2196f3;
-  color: white;
+  background: #424242;
+  color: #e0e0e0;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
+  transition: all 0.3s ease;
 
   &:hover {
-    background: #1976d2;
+    background: #4a4a4a;
   }
 `;
 
@@ -177,6 +194,7 @@ const QuantityDisplay = styled.span`
   min-width: 30px;
   text-align: center;
   font-weight: 500;
+  color: white;
 `;
 
 const RemoveButton = styled.button`
@@ -184,44 +202,47 @@ const RemoveButton = styled.button`
   padding: 6px 12px;
   border: none;
   border-radius: 4px;
-  background: #ff5252;
-  color: white;
+  background: #505050;
+  color: #e0e0e0;
   cursor: pointer;
   font-size: 14px;
+  transition: all 0.3s ease;
 
   &:hover {
-    background: #d32f2f;
+    background: #5a5a5a;
   }
 `;
 
 const CartFooter = styled.div`
   padding: 16px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #444;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  background: #2d2d2d;
 `;
 
 const TotalAmount = styled.div`
   font-size: 18px;
   font-weight: 600;
   text-align: right;
-  color: #2196f3;
+  color: #1e88e5;
 `;
 
 const OrderButton = styled.button`
   padding: 12px;
   border: none;
   border-radius: 8px;
-  background: #2196f3;
-  color: white;
+  background: #424242;
+  color: #e0e0e0;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 
   &:hover {
-    background: #1976d2;
+    background: #4a4a4a;
+    transform: translateY(-1px);
   }
 `;
 

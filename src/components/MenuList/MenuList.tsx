@@ -8,13 +8,13 @@ interface MenuListProps {
 }
 
 const MenuList = ({ items, category, onAddToCart }: MenuListProps) => {
-  const filteredItems = items.filter(item => item.category === category);
+  const filteredItems = items.filter((item) => item.category === category);
 
   return (
     <Container>
       <CategoryTitle>{category}</CategoryTitle>
       <GridContainer>
-        {filteredItems.map(item => (
+        {filteredItems.map((item) => (
           <MenuCard key={item.id}>
             <MenuImage src={item.image} alt={item.name} />
             <MenuInfo>
@@ -42,7 +42,7 @@ const CategoryTitle = styled.h2`
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 20px;
-  color: #333;
+  color: white;
 `;
 
 const GridContainer = styled.div`
@@ -52,10 +52,10 @@ const GridContainer = styled.div`
 `;
 
 const MenuCard = styled.div`
-  background: white;
+  background: #2d2d2d;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
 
   &:hover {
@@ -77,12 +77,12 @@ const MenuName = styled.h3`
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 8px 0;
-  color: #333;
+  color: white;
 `;
 
 const MenuDescription = styled.p`
   font-size: 14px;
-  color: #666;
+  color: #b0b0b0;
   margin: 0 0 12px 0;
   line-height: 1.4;
 `;
@@ -96,22 +96,23 @@ const MenuFooter = styled.div`
 const MenuPrice = styled.p`
   font-size: 16px;
   font-weight: 600;
-  color: #2196f3;
+  color: #1e88e5;
   margin: 0;
 `;
 
 const AddToCartButton = styled.button`
   padding: 8px 16px;
-  background-color: #2196f3;
-  color: white;
+  background-color: #424242;
+  color: #e0e0e0;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
 
   &:hover {
-    background-color: #1976d2;
+    background-color: #4a4a4a;
+    transform: translateY(-1px);
   }
 `;
 

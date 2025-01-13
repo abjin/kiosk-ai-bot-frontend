@@ -68,17 +68,17 @@ const ChatButton = styled.button`
   bottom: 20px;
   left: 20px;
   padding: 12px 24px;
-  background-color: #2196f3;
-  color: white;
+  background-color: #424242;
+  color: #e0e0e0;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   font-size: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #1976d2;
+    background-color: #4a4a4a;
     transform: translateY(-2px);
   }
 `;
@@ -89,16 +89,16 @@ const ChatContainer = styled.div`
   left: 20px;
   width: 350px;
   height: 500px;
-  background: white;
+  background: #2d2d2d;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
 `;
 
 const ChatHeader = styled.div`
   padding: 16px;
-  background: #2196f3;
+  background: #1e88e5;
   color: white;
   border-radius: 12px 12px 0 0;
 
@@ -121,8 +121,8 @@ const Message = styled.div<{ isUser: boolean }>`
   max-width: 80%;
   padding: 12px;
   border-radius: 12px;
-  background: ${(props) => (props.isUser ? '#2196f3' : '#f5f5f5')};
-  color: ${(props) => (props.isUser ? 'white' : '#333')};
+  background: ${(props) => (props.isUser ? '#424242' : '#363636')};
+  color: #e0e0e0;
   align-self: ${(props) => (props.isUser ? 'flex-end' : 'flex-start')};
 `;
 
@@ -130,33 +130,41 @@ const Form = styled.form`
   display: flex;
   padding: 16px;
   gap: 8px;
+  background: #2d2d2d;
+  border-top: 1px solid #444;
 `;
 
 const Input = styled.input`
   flex: 1;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid #444;
   border-radius: 25px;
   font-size: 14px;
   outline: none;
+  background: #3d3d3d;
+  color: white;
 
   &:focus {
-    border-color: #2196f3;
+    border-color: #1e88e5;
+  }
+
+  &::placeholder {
+    color: #888;
   }
 `;
 
 const SendButton = styled.button`
   padding: 12px 24px;
-  background: #2196f3;
-  color: white;
+  background: #424242;
+  color: #e0e0e0;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   font-size: 14px;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 
   &:hover {
-    background: #1976d2;
+    background: #4a4a4a;
   }
 `;
 

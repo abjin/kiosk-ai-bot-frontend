@@ -83,14 +83,14 @@ function App() {
 
 const Container = styled.div`
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #1a1a1a;
 `;
 
 const Header = styled.header`
-  background-color: #2196f3;
+  background-color: #424242;
   padding: 20px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `;
 
 const Title = styled.h1`
@@ -104,8 +104,8 @@ const CategoryNav = styled.nav`
   display: flex;
   gap: 12px;
   padding: 20px;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  background: #2d2d2d;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow-x: auto;
 
   &::-webkit-scrollbar {
@@ -113,7 +113,7 @@ const CategoryNav = styled.nav`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+    background-color: #555;
     border-radius: 2px;
   }
 `;
@@ -122,8 +122,8 @@ const CategoryButton = styled.button<{ selected: boolean }>`
   padding: 10px 20px;
   border: none;
   border-radius: 25px;
-  background: ${(props) => (props.selected ? '#2196f3' : 'white')};
-  color: ${(props) => (props.selected ? 'white' : '#333')};
+  background: ${(props) => (props.selected ? '#424242' : '#2d2d2d')};
+  color: ${(props) => (props.selected ? '#e0e0e0' : '#9e9e9e')};
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -131,7 +131,8 @@ const CategoryButton = styled.button<{ selected: boolean }>`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background: ${(props) => (props.selected ? '#1976d2' : '#f5f5f5')};
+    background: ${(props) => (props.selected ? '#4a4a4a' : '#363636')};
+    color: #e0e0e0;
   }
 `;
 
