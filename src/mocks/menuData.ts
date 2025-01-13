@@ -32,7 +32,8 @@ export const menuItems: MenuItem[] = [
     name: '프렌치 프라이',
     price: 4500,
     description: '바삭하고 고소한 감자튀김',
-    image: 'https://via.placeholder.com/150',
+    image:
+      'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDEwMDNfMjk1%2FMDAxNzI3OTI4OTA0NzI0.zae8HIzVBEejn3Q__Q-Z0LGdGg61LBCdJQZcVoN15Zwg.pGTGO0aP5Wfm2rV9V_Uu-BLMAZaCunxNca4rtLdyT8Ug.PNG%2Fimage.png&type=sc960_832',
     category: '사이드',
   },
   {
@@ -40,7 +41,8 @@ export const menuItems: MenuItem[] = [
     name: '치킨 너겟',
     price: 5500,
     description: '바삭한 치킨 너겟 6조각',
-    image: 'https://via.placeholder.com/150',
+    image:
+      'https://search.pstatic.net/common/?src=https%3A%2F%2Fshop-phinf.pstatic.net%2F20240105_111%2F17044225309291wRdQ_JPEG%2F105558314643017326_2082127128.jpg&type=a340',
     category: '사이드',
   },
   {
@@ -48,7 +50,8 @@ export const menuItems: MenuItem[] = [
     name: '콜라',
     price: 2500,
     description: '시원한 콜라',
-    image: 'https://via.placeholder.com/150',
+    image:
+      'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAyMThfOTkg%2FMDAxNjEzNjA3NzMwNzk0.o8zbR-rHQidHOdQdnLYRsE6C4KaQktGWlhRg764Xkzsg.jVPWws_0-H9TBINFlDsNUmBVTDBIQ1v3ThIfmey943Yg.JPEG.sctop1255%2Fpc0030975358_l.jpg&type=a340',
     category: '음료',
   },
   {
@@ -56,7 +59,8 @@ export const menuItems: MenuItem[] = [
     name: '레모네이드',
     price: 3500,
     description: '상큼한 레모네이드',
-    image: 'https://via.placeholder.com/150',
+    image:
+      'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20140901_290%2Fbongs1021_1409557529875NqFMo_JPEG%2Fh_G106276.JPG&type=a340',
     category: '음료',
   },
 ];
