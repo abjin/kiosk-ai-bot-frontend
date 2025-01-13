@@ -32,7 +32,7 @@ const ChatBot = () => {
   return (
     <>
       <ChatButton onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? '닫기' : '챗봇 상담'}
+        {isOpen ? '닫기' : 'AI 메뉴 추천'}
       </ChatButton>
 
       {isOpen && (
