@@ -48,7 +48,7 @@ function Routes() {
   return (
     <Container>
       <Header>
-        <Title>🍔 Kiosk AI Bot test🍔</Title>
+        <Title>🍔 Kiosk AI Bot 🍔</Title>
       </Header>
 
       <CategoryNav>
