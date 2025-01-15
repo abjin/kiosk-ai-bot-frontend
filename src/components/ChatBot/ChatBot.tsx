@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { MenuItem } from '../../mocks/menuData';
 import api from '../../api';
+import { AxiosError } from 'axios';
 
 interface ChatBotProps {
   onAddToCart: (item: MenuItem) => void;
@@ -42,11 +43,13 @@ const ChatBot = ({ onAddToCart }: ChatBotProps) => {
         },
       ]);
     } catch (error) {
-      console.log(error);
       setMessages((prev) => [
         ...prev,
         {
-          text: '죄송합니다. 오류가 발생했습니다. 다시 시도해주세요.',
+          text:
+            error instanceof AxiosError && error.status === 429
+              ? '요청이 너무 많아 잠시 중단되었습니다. 잠시 후 다시 시도해 주세요. 문제가 계속되면 개발자에게 문의하시기 바랍니다.'
+              : '작업을 처리하는 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요. 불편을 드려 죄송합니다.',
           isUser: false,
         },
       ]);
