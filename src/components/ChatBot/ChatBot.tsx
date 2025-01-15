@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { MenuItem, mockResponse } from '../../mocks/menuData';
+import { MenuItem } from '../../mocks/menuData';
+import api from '../../api';
 
 interface ChatBotProps {
   onAddToCart: (item: MenuItem) => void;
@@ -24,12 +25,14 @@ const ChatBot = ({ onAddToCart }: ChatBotProps) => {
 
     setMessages((prev) => [...prev, { text: input, isUser: true }]);
 
+    const response = await api.getAiCompletions(input);
+
     setMessages((prev) => [
       ...prev,
       {
-        text: mockResponse.description,
+        text: response.description,
         isUser: false,
-        recommendedItems: mockResponse.recommendedItems,
+        recommendedItems: response.recommendedItems,
       },
     ]);
     setInput('');
