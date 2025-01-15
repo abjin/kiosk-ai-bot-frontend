@@ -71,7 +71,7 @@ function Routes() {
         />
       </Main>
 
-      <ChatBot />
+      <ChatBot onAddToCart={addToCart} />
       <Cart
         items={cartItems}
         onUpdateQuantity={updateQuantity}

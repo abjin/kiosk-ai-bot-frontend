@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { MenuItem, mockResponse } from '../../mocks/menuData';
 
-const ChatBot = () => {
+interface ChatBotProps {
+  onAddToCart: (item: MenuItem) => void;
+}
+
+const ChatBot = ({ onAddToCart }: ChatBotProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<
-    Array<{ text: string; isUser: boolean }>
+    Array<{ text: string; isUser: boolean; recommendedItems?: MenuItem[] }>
   >([
     {
       text: '안녕하세요! 주문을 도와드릴 수 있습니다. 어떤 메뉴를 찾으시나요?',
@@ -13,17 +18,18 @@ const ChatBot = () => {
   ]);
   const [input, setInput] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
 
     setMessages((prev) => [...prev, { text: input, isUser: true }]);
-    // 실제 챗봇 응답은 API 연동 후 구현
+
     setMessages((prev) => [
       ...prev,
       {
-        text: '현재는 데모 버전입니다. API 연동 후 실제 응답이 제공될 예정입니다.',
+        text: mockResponse.description,
         isUser: false,
+        recommendedItems: mockResponse.recommendedItems,
       },
     ]);
     setInput('');
@@ -43,9 +49,26 @@ const ChatBot = () => {
 
           <MessagesContainer>
             {messages.map((message, index) => (
-              <Message key={index} isUser={message.isUser}>
-                {message.text}
-              </Message>
+              <MessageGroup key={index}>
+                <Message isUser={message.isUser}>{message.text}</Message>
+                {message.recommendedItems && (
+                  <RecommendedItems>
+                    {message.recommendedItems.map((item) => (
+                      <RecommendedItem key={item.id}>
+                        <ItemImage src={item.image} alt={item.name} />
+                        <ItemInfo>
+                          <ItemName>{item.name}</ItemName>
+                          <ItemDescription>{item.description}</ItemDescription>
+                          <ItemPrice>{item.price.toLocaleString()}원</ItemPrice>
+                        </ItemInfo>
+                        <AddButton onClick={() => onAddToCart(item)}>
+                          담기
+                        </AddButton>
+                      </RecommendedItem>
+                    ))}
+                  </RecommendedItems>
+                )}
+              </MessageGroup>
             ))}
           </MessagesContainer>
 
@@ -165,6 +188,74 @@ const SendButton = styled.button`
 
   &:hover {
     background: #4a4a4a;
+  }
+`;
+
+const MessageGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+`;
+
+const RecommendedItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-self: flex-start;
+`;
+
+const RecommendedItem = styled.div`
+  display: flex;
+  align-items: center;
+  background: #3d3d3d;
+  border-radius: 8px;
+  padding: 8px;
+  gap: 12px;
+`;
+
+const ItemImage = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  object-fit: cover;
+`;
+
+const ItemInfo = styled.div`
+  flex: 1;
+`;
+
+const ItemName = styled.h4`
+  margin: 0;
+  color: #ffffff;
+  font-size: 14px;
+`;
+
+const ItemDescription = styled.p`
+  margin: 4px 0;
+  color: #b0b0b0;
+  font-size: 12px;
+`;
+
+const ItemPrice = styled.p`
+  margin: 0;
+  color: #1e88e5;
+  font-size: 14px;
+  font-weight: 600;
+`;
+
+const AddButton = styled.button`
+  padding: 6px 12px;
+  background-color: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #1976d2;
   }
 `;
 
