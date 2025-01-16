@@ -43,6 +43,10 @@ const ChatBot = ({ onAddToCart }: ChatBotProps) => {
     SpeechRecognition.startListening({ language: 'ko-KR' });
   };
 
+  const speech = (text: string) => {
+    window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+  };
+
   const sendMessage = async (input: string) => {
     setMessages((prev) => [...prev, { text: input, isUser: true }]);
     setIsLoading(true);
@@ -52,6 +56,8 @@ const ChatBot = ({ onAddToCart }: ChatBotProps) => {
 
     try {
       const response = await api.getAiCompletions(userInput);
+
+      speech(response.description);
 
       setMessages((prev) => [
         ...prev,
