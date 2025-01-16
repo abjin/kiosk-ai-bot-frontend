@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { MenuItem } from '../../mocks/menuData';
 import api from '../../api';
@@ -30,6 +30,12 @@ const ChatBot = ({ onAddToCart }: ChatBotProps) => {
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
+
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   useEffect(() => {
     if (transcript) {
@@ -136,6 +142,7 @@ const ChatBot = ({ onAddToCart }: ChatBotProps) => {
                   <LoadingDot delay="0.4s">.</LoadingDot>
                 </LoadingMessage>
               )}
+              <div ref={messagesEndRef}></div>
             </ChatMessages>
           </MessagesContainer>
 
