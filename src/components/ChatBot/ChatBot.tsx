@@ -34,22 +34,16 @@ const ChatBot = ({ onAddToCart }: ChatBotProps) => {
   useEffect(() => {
     if (transcript) {
       setInput(transcript);
+      if (!listening) sendMessage(transcript);
     }
-  }, [transcript]);
+  }, [transcript, listening]);
 
   const onClickMic = () => {
-    if (listening) {
-      SpeechRecognition.stopListening();
-    } else {
-      resetTranscript();
-      SpeechRecognition.startListening({ language: 'ko-KR' });
-    }
+    resetTranscript();
+    SpeechRecognition.startListening({ language: 'ko-KR' });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
+  const sendMessage = async (input: string) => {
     setMessages((prev) => [...prev, { text: input, isUser: true }]);
     setIsLoading(true);
 
@@ -81,6 +75,12 @@ const ChatBot = ({ onAddToCart }: ChatBotProps) => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    await sendMessage(input);
   };
 
   return (
