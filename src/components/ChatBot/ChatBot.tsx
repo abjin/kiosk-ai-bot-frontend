@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { MenuItem } from '../../mocks/menuData';
 import api from '../../api';
 import { AxiosError } from 'axios';
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from 'react-speech-recognition';
 
 interface ChatBotProps {
   onAddToCart: (item: MenuItem) => void;
@@ -20,6 +23,28 @@ const ChatBot = ({ onAddToCart }: ChatBotProps) => {
     },
   ]);
   const [input, setInput] = useState('');
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  useEffect(() => {
+    if (transcript) {
+      setInput(transcript);
+    }
+  }, [transcript]);
+
+  const onClickMic = () => {
+    if (listening) {
+      SpeechRecognition.stopListening();
+    } else {
+      resetTranscript();
+      SpeechRecognition.startListening({ language: 'ko-KR' });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,14 +133,25 @@ const ChatBot = ({ onAddToCart }: ChatBotProps) => {
             </ChatMessages>
           </MessagesContainer>
 
-          <Form onSubmit={handleSubmit}>
+          <InputContainer onSubmit={handleSubmit}>
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="메시지를 입력하세요..."
+              disabled={isLoading}
             />
-            <SendButton type="submit">전송</SendButton>
-          </Form>
+            <MicButton
+              type="button"
+              onClick={onClickMic}
+              $isListening={listening}
+              disabled={!browserSupportsSpeechRecognition}
+            >
+              🎤
+            </MicButton>
+            <SendButton type="submit" disabled={isLoading}>
+              전송
+            </SendButton>
+          </InputContainer>
         </ChatContainer>
       )}
     </>
@@ -259,11 +295,9 @@ const AddButton = styled.button`
   }
 `;
 
-const Form = styled.form`
+const InputContainer = styled.form`
   display: flex;
-  padding: 16px;
-  gap: 8px;
-  background: #2d2d2d;
+  padding: 10px;
   border-top: 1px solid #444;
 `;
 
@@ -283,6 +317,27 @@ const Input = styled.input`
 
   &::placeholder {
     color: #888;
+  }
+`;
+
+const MicButton = styled.button<{ $isListening: boolean }>`
+  padding: 8px 16px;
+  margin-left: 8px;
+  margin-right: 8px;
+  background-color: ${(props) => (props.$isListening ? '#ff4444' : '#424242')};
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 3s;
+
+  &:hover {
+    background-color: ${(props) =>
+      props.$isListening ? '#ff6666' : '#e0e0e0'};
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `;
 
